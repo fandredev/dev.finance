@@ -50,7 +50,7 @@ https://deevfinance.vercel.app/
 ## ⛏️ Ferramentas utilizadas <a name = "built_using"></a>
 
 - [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML) - Hyper Text Markup Language
-- [CSS]https://developer.mozilla.org/pt-BR/docs/Web/CSS) - Cascading Style Sheets
+- [CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS) - Cascading Style Sheets
 - [Javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript) - Language Programming
 - [Typescript](https://www.typescriptlang.org/) - Superset Javascript
 
