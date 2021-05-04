@@ -10,10 +10,10 @@
 
 ## 📝 Tabela de conteúdos
 
-- [About](#about)
-- [Getting Started](#getting_started)
-- [Deployment](#deployment)
-- [Built Using](#built_using)
+- [Sobre](#about)
+- [Começando](#getting_started)
+- [Delopy](#deployment)
+- [Ferramentas utilzadas](#built_using)
 - [Authors](#authors)
 
 ## 🧐 Sobre <a name = "about"></a>
@@ -24,7 +24,7 @@ Projeto aplicado com HTML, CSS e Javascript de aplicação financeira do maraton
 
 Essas instruções fornecerão uma cópia do projeto instalado e funcionando em sua máquina local para fins de desenvolvimento e teste. Consulte implantação para obter notas sobre como implantar o projeto em um sistema ativo.
 
-### Installing
+### Instalação
 
 Uma série de exemplos passo a passo que mostram como colocar um env de desenvolvimento em execução.
 
@@ -45,7 +45,7 @@ Sua aplicação agora estará no ar!
 
 ## 🚀 Deploy <a name = "deployment"></a>
 
-Add additional notes about how to deploy this on a live system.
+https://deevfinance.vercel.app/
 
 ## ⛏️ Ferramentas utilizadas <a name = "built_using"></a>
 
