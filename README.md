@@ -1,8 +1,3 @@
-<p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Logotipo dev.finance$"></a>
-</p>
-
 <h3 align="center">dev.finance$</h3>
 
 <div align="center">
@@ -13,26 +8,23 @@
 
 ---
 
-## 📝 Table of Contents
+## 📝 Tabela de conteúdos
 
-- [About](#about)
-- [Getting Started](#getting_started)
-- [Deployment](#deployment)
-- [Usage](#usage)
-- [Built Using](#built_using)
-- [TODO](../TODO.md)
-- [Contributing](../CONTRIBUTING.md)
+- [Sobre](#about)
+- [Começando](#getting_started)
+- [Delopy](#deployment)
+- [Ferramentas utilzadas](#built_using)
 - [Authors](#authors)
 
 ## 🧐 Sobre <a name = "about"></a>
 
 Projeto aplicado com HTML, CSS e Javascript de aplicação financeira do maratona Discover da Rocketseat.
 
-## 🏁 Getting Started <a name = "getting_started"></a>
+## 🏁 Como começar <a name = "getting_started"></a>
 
 Essas instruções fornecerão uma cópia do projeto instalado e funcionando em sua máquina local para fins de desenvolvimento e teste. Consulte implantação para obter notas sobre como implantar o projeto em um sistema ativo.
 
-### Installing
+### Instalação
 
 Uma série de exemplos passo a passo que mostram como colocar um env de desenvolvimento em execução.
 
@@ -42,50 +34,27 @@ Clone esse repositório
 https://github.com/flubyGit/dev.finance.git
 ```
 
-Abra o projeto no seu navegador
+Abra o projeto no seu navegador usando a extensão 'Live Server' do seu editor de texto.
 
-```
-until finished
-```
+![Screenshot from 2021-05-04 15-45-34](https://user-images.githubusercontent.com/49297012/117053811-cd82e180-acef-11eb-9408-6ae392e1aa5f.png)
 
-End with an example of getting some data out of the system or using it for a little demo.
+Sua aplicação agora estará no ar!
+![Screenshot from 2021-05-04 15-44-02](https://user-images.githubusercontent.com/49297012/117053640-944a7180-acef-11eb-8a09-8d9dabec6348.png)
 
-## 🔧 Running the tests <a name = "tests"></a>
 
-Explain how to run the automated tests for this system.
 
-### Break down into end to end tests
+## 🚀 Deploy <a name = "deployment"></a>
 
-Explain what these tests test and why
+https://deevfinance.vercel.app/
 
-```
-Give an example
-```
+## ⛏️ Ferramentas utilizadas <a name = "built_using"></a>
 
-### And coding style tests
+- [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML) - Hyper Text Markup Language
+- [CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS) - Cascading Style Sheets
+- [Javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript) - Language Programming
+- [Typescript](https://www.typescriptlang.org/) - Superset Javascript
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## 🎈 Usage <a name="usage"></a>
-
-Add notes about how to use the system.
-
-## 🚀 Deployment <a name = "deployment"></a>
-
-Add additional notes about how to deploy this on a live system.
-
-## ⛏️ Built Using <a name = "built_using"></a>
-
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
-
-## ✍️ Authors <a name = "authors"></a>
+## ✍️ Autores <a name = "authors"></a>
 
 - [Felipe André](https://github.com/flubyGit) - Developer Front-End
 - [Mayk Brito](https://github.com/maykbrito) - An instructor focused on helping people start programming for web
