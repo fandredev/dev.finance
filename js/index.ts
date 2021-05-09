@@ -4,6 +4,7 @@ interface ModalProps {
   close: () => void
 }
 interface TransactionsProps {
+  all: any
   add: (transaction) => void
   remove: (index: number) => void
   incomes: () => number
@@ -21,8 +22,8 @@ interface TransactionsDataAmountString {
   date: string
 }
 interface DomProps {
-  innerHTMLTransaction: (transactions: TransactionsData) => string
-  addTransactions: (transactions: TransactionsData, index?: number) => void,
+  innerHTMLTransaction: (transactions: TransactionsData, index: string) => string
+  addTransactions: (transactions: TransactionsData, index: string) => void,
   transactionsContainer: HTMLElement,
   updateBalance: () => void,
   clearTransactions: () => void
@@ -45,6 +46,10 @@ interface UtilsProps {
   formatAmount: (value: string | number) => any
   formatDate: (value: string) => string
 }
+interface StorageProps {
+  get:() => void
+  set:(transaction: TransactionsData) => void
+}
 
 /* Interfaces & Types End */
 
@@ -56,25 +61,34 @@ const Modal: ModalProps = {
     document.querySelector('.modal-overlay').classList.remove('active')
   }
 }
+const Storages: StorageProps = {
+  get(){
+    return JSON.parse(localStorage.getItem('dev.finances:transactions')) || []
+  },
+  set(transactions: TransactionsData){
+    localStorage.setItem('dev.finances:transactions', JSON.stringify(transactions))
+  }
+}
 const transaction: TransactionsProps = {
-  add(transaction: TransactionsData) {
-    transactions.push(transaction)
+  all: Storages.get(),
+  add(t: TransactionsData) {
+    transaction.all.push(t)
     App.reload()
   },
   remove(index) {
-    transactions.splice(index, 1)
+    transaction.all.splice(index, 1)
     App.reload()
   },
   incomes() {
     let income = 0
-    transactions.forEach(transaction => {
+    transaction.all.forEach(transaction => {
       if (transaction.amount > 0) income += transaction.amount
     })
     return income
   },
   expenses() {
     let expense = 0
-    transactions.forEach(transaction => {
+    transaction.all.forEach(transaction => {
       if (transaction.amount < 0) expense += transaction.amount
     })
     return expense
@@ -84,22 +98,10 @@ const transaction: TransactionsProps = {
     return transaction.incomes() + transaction.expenses()
   }
 }
-const transactions: TransactionsData[] = [{
-  description: 'Luz',
-  amount: -50000,
-  date: '23/01/2021'
-}, {
-  description: 'Website',
-  amount: 500000,
-  date: '23/01/2021'
-}, {
-  description: 'Internet',
-  amount: -20000,
-  date: '23/01/2021'
-}]
+
 const DOM: DomProps = {
   transactionsContainer: document.querySelector('#data-table tbody'),
-  innerHTMLTransaction(transaction: TransactionsData) {
+  innerHTMLTransaction(transaction: TransactionsData, index: string) {
     const CSSClass: IncomeOrExpense = transaction.amount > 0 ? 'income' : 'expense'
     const amount: string | number = Utils.formatCurrency(transaction.amount)
 
@@ -109,15 +111,16 @@ const DOM: DomProps = {
         <td class="${CSSClass}">${amount}</td>
         <td class="date">${transaction.date}</td>
         <td>
-        <img src="assets/minus.svg" alt="Remover transação" />
-      </td>
+          <img onclick="transaction.remove(${index})" src="assets/minus.svg" alt="Remover transação" />
+        </td>
     </tr>
     `
     return html
   },
-  addTransactions(transaction: TransactionsData, index: number) {
+  addTransactions(transaction: TransactionsData, index: string) {
     const tr: HTMLTableRowElement = document.createElement('tr')
-    tr.innerHTML = DOM.innerHTMLTransaction(transaction)
+    tr.innerHTML = DOM.innerHTMLTransaction(transaction, index)
+    tr.dataset.index = index
 
     DOM.transactionsContainer.appendChild(tr)
   },
@@ -200,10 +203,12 @@ const Form: FormProps = {
     }
   }
 }
+
 const App = {
   init() {
-    transactions.forEach((transaction: TransactionsData) => DOM.addTransactions(transaction))
+    transaction.all.forEach((transaction: TransactionsData, i) => DOM.addTransactions(transaction, String(i)))
     DOM.updateBalance()
+    Storages.set(transaction.all)
   },
   reload() {
     DOM.clearTransactions()

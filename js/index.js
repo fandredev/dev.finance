@@ -7,18 +7,27 @@ var Modal = {
         document.querySelector('.modal-overlay').classList.remove('active');
     }
 };
+var Storages = {
+    get: function () {
+        return JSON.parse(localStorage.getItem('dev.finances:transactions')) || [];
+    },
+    set: function (transactions) {
+        localStorage.setItem('dev.finances:transactions', JSON.stringify(transactions));
+    }
+};
 var transaction = {
-    add: function (transaction) {
-        transactions.push(transaction);
+    all: Storages.get(),
+    add: function (t) {
+        transaction.all.push(t);
         App.reload();
     },
     remove: function (index) {
-        transactions.splice(index, 1);
+        transaction.all.splice(index, 1);
         App.reload();
     },
     incomes: function () {
         var income = 0;
-        transactions.forEach(function (transaction) {
+        transaction.all.forEach(function (transaction) {
             if (transaction.amount > 0)
                 income += transaction.amount;
         });
@@ -26,7 +35,7 @@ var transaction = {
     },
     expenses: function () {
         var expense = 0;
-        transactions.forEach(function (transaction) {
+        transaction.all.forEach(function (transaction) {
             if (transaction.amount < 0)
                 expense += transaction.amount;
         });
@@ -36,30 +45,18 @@ var transaction = {
         return transaction.incomes() + transaction.expenses();
     }
 };
-var transactions = [{
-        description: 'Luz',
-        amount: -50000,
-        date: '23/01/2021'
-    }, {
-        description: 'Website',
-        amount: 500000,
-        date: '23/01/2021'
-    }, {
-        description: 'Internet',
-        amount: -20000,
-        date: '23/01/2021'
-    }];
 var DOM = {
     transactionsContainer: document.querySelector('#data-table tbody'),
-    innerHTMLTransaction: function (transaction) {
+    innerHTMLTransaction: function (transaction, index) {
         var CSSClass = transaction.amount > 0 ? 'income' : 'expense';
         var amount = Utils.formatCurrency(transaction.amount);
-        var html = "\n      <tr>\n        <td class=\"description\">" + transaction.description + "</td>\n        <td class=\"" + CSSClass + "\">" + amount + "</td>\n        <td class=\"date\">" + transaction.date + "</td>\n        <td>\n        <img src=\"assets/minus.svg\" alt=\"Remover transa\u00E7\u00E3o\" />\n      </td>\n    </tr>\n    ";
+        var html = "\n      <tr>\n        <td class=\"description\">" + transaction.description + "</td>\n        <td class=\"" + CSSClass + "\">" + amount + "</td>\n        <td class=\"date\">" + transaction.date + "</td>\n        <td>\n          <img onclick=\"transaction.remove(" + index + ")\" src=\"assets/minus.svg\" alt=\"Remover transa\u00E7\u00E3o\" />\n        </td>\n    </tr>\n    ";
         return html;
     },
     addTransactions: function (transaction, index) {
         var tr = document.createElement('tr');
-        tr.innerHTML = DOM.innerHTMLTransaction(transaction);
+        tr.innerHTML = DOM.innerHTMLTransaction(transaction, index);
+        tr.dataset.index = index;
         DOM.transactionsContainer.appendChild(tr);
     },
     updateBalance: function () {
@@ -136,8 +133,9 @@ var Form = {
 };
 var App = {
     init: function () {
-        transactions.forEach(function (transaction) { return DOM.addTransactions(transaction); });
+        transaction.all.forEach(function (transaction, i) { return DOM.addTransactions(transaction, String(i)); });
         DOM.updateBalance();
+        Storages.set(transaction.all);
     },
     reload: function () {
         DOM.clearTransactions();
