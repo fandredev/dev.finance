@@ -81,7 +81,7 @@ var Utils = {
     },
     formatAmount: function (value) {
         value = Number(value) * 100;
-        return value;
+        return Math.round(value);
     },
     formatDate: function (date) {
         var splittedDate = date.split('-');
